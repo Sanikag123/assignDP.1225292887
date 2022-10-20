@@ -1,18 +1,27 @@
-public class Person {
+public abstract class Person {
 
-    String userName;
-    String userType;
+	private ProductMenu theProductMenu;
 
-    public String getUserName() {
-        return userName;
-    }
+	private ProductMenu productMenu;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public abstract void showMenu();
 
+	public void showAddButton() {
 
+	}
 
+	public void showViewButton() {
 
+	}
+
+	public void showRadioButton() {
+
+	}
+
+	public void showLabels() {
+
+	}
+
+	public abstract ProductMenu CreateProductMenu();
 
 }
