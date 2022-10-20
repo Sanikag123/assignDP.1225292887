@@ -8,43 +8,47 @@ public class Login {
     String password;
     static Facade facade = new Facade();
 
-    public static boolean loginScreen(int userType, Person person) {
+    public static UserInfoItem loginScreen(int userType, UserInfoItem userInfoItem) {
         String record = null;
         FileReader in = null;
+
         try {
-            if(userType == 1) {
-                in = new FileReader("src/SellerInfo.txt");
-            }
-            else
-                in = new FileReader("src/BuyerInfo.txt");
+            if (userType == 1) {
+                in = new FileReader("SellerInfo.txt");
+            } else
+                in = new FileReader("BuyerInfo.txt");
 
-            BufferedReader br = new BufferedReader(in);
-            Scanner scan = new Scanner(System.in);
 
-            System.out.print("Username: ");
-            String user = scan.nextLine();
+                BufferedReader br = new BufferedReader(in);
+                Scanner scan = new Scanner(System.in);
 
-            System.out.print("Password: ");
-            String pass = scan.nextLine();
-            String credentials = user + ":" + pass;
-            while ((record = br.readLine()) !=null) {
+                System.out.print("Username: ");
+                String user = scan.nextLine();
 
-                if (credentials.equals(record)) {
-                    System.out.println("Credentials matching");
-                    person.setUserName(user);
-                    return true;
+                System.out.print("Password: ");
+                String pass = scan.nextLine();
+                String credentials = user + ":" + pass;
+                while ((record = br.readLine()) != null) {
 
-                } else {
-                    System.out.println("________----Error----________\n press 'Enter' to continue...");
-                    scan.nextLine();
-                    //checkInput();
+                    if (credentials.equals(record)) {
+                        System.out.println("Credentials matching");
+                        userInfoItem.setUserName(user);
+                        userInfoItem.setUserType(userType);
+                        break;
+
+
+                    } else {
+                        System.out.println("Credentials not matching. Try again");
+                        scan.nextLine();
+                        //checkInput();
+                    }
                 }
-            }
-        } catch (IOException e) {
+
+        }
+            catch (IOException e) {
             e.getCause();
         }
-
-        return false;
+        return userInfoItem;
     }
 
 }
