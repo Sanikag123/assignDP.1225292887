@@ -3,5 +3,6 @@ public class Main {
 
         Facade facade = new Facade();
         boolean flag = facade.login();
+        facade.createProductList();
     }
 }
