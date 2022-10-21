@@ -1,3 +1,6 @@
+/**
+ * This represents the iterator design pattern which is implemented by OfferingIterator class.
+ */
 public interface ListIterator {
 
 	public abstract boolean hasNext();

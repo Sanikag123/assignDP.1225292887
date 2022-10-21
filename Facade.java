@@ -1,9 +1,16 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class represents the facade design pattern. The façade class object provides a single interface to the more
+ * general facilities of other subsystems.
+ */
 public class Facade {
 
 	private static int UserType; // The type of the user: Buyer: 0, Seller 1
@@ -20,7 +27,10 @@ public class Facade {
 	ArrayList arr = new ArrayList();
 
 
-
+	/**
+	 * This method is used for login and validating login credentials
+	 * @return
+	 */
 	public static boolean login() {
 
 		System.out.println("Enter if buyer or seller. Enter 0 for buyer and 1 for seller");
@@ -31,16 +41,20 @@ public class Facade {
 		UserInfoItem validate =  new Login().loginScreen(person,userInfoItem);
 		if (validate != null) {
 			createUser(validate);
+
+			/**
+			 * This represents the funtionality of Factory pattern, it depends on the login user which user type to instantiate
+			 */
 			if (person == 1) {
 				System.out.println("Person is a seller");
-				Seller seller = new Seller(userInfoItem);
+				Person seller = new Seller(userInfoItem);
 
 				seller.CreateProductMenu();
 				seller.showMenu();
 			}
 			else {
 				System.out.println("Person is a buyer");
-				Buyer buyer = new Buyer(userInfoItem);
+				Person buyer = new Buyer(userInfoItem);
 
 
 				buyer.showMenu();
@@ -53,22 +67,31 @@ public class Facade {
 	return true;
 	}
 
+	/**
+	 * This method is the final result of which trade is finalised between buyer and the seller
+	 * @param o
+	 */
 	public static void addTrading(Offering o) {
 		System.out.println("Following trade has been finalised");
 		System.out.println("Buyer name: " + userInfoItem.user);
 		System.out.println("Seller name: " + o.getSellerName());
 		System.out.println("Product name: " + o.getProductOffering());
+//Clear the contents of the buyer product file
+		BufferedWriter writer = null;
+		try {
+			writer = Files.newBufferedWriter(Paths.get("BuyerProductCart"));
+			writer.write("");
+			writer.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
 
 	}
 
-	public void viewTrading() {
-
-	}
-
-	public static void decideBidding() {
-
-	}
-
+	/**
+	 * This method is used for discussing which bid to finalise from the options of trades available.
+	 */
 	public static void discussBidding() {
 
 		OfferingList allOfferings = new OfferingList();
@@ -90,6 +113,9 @@ public class Facade {
 					line = br.readLine();
 
 			}
+			/**
+			 * This is a part of iterator design pattern implementation.
+			 */
 			OfferingIterator offeringIterator = new OfferingIterator(allOfferings,theSelectedProduct);
 			OfferingList finalOfferingList = new OfferingList();
 			while(offeringIterator.hasNext()){
@@ -105,13 +131,24 @@ public class Facade {
 		}
 	}
 
+	/**
+	 * This method is used for finalising the bid and adding the trade
+	 * @param finalOfferingList
+	 */
 	public static void submitBidding(OfferingList finalOfferingList) {
-		System.out.println("Select the offering from the seller: ");
-		for (int i=0;i<finalOfferingList.size();i++) {
-			System.out.println( i+1 +": Seller Name: " + ((Offering) (finalOfferingList.get(i))).getSellerName()
-					+ " Price offered: " + ((Offering) (finalOfferingList.get(i))).getPrice()
-					+ " Product name: " + ((Offering) (finalOfferingList.get(i))).getProductOffering());
+		if(finalOfferingList.size() > 0) {
+			System.out.println("Select the offering from the seller: (Enter the serial no.) ");
+			for (int i = 0; i < finalOfferingList.size(); i++) {
+				System.out.println(i + 1 + ": Seller Name: " + ((Offering) (finalOfferingList.get(i))).getSellerName()
+						+ " Price offered: " + ((Offering) (finalOfferingList.get(i))).getPrice()
+						+ " Product name: " + ((Offering) (finalOfferingList.get(i))).getProductOffering());
+			}
 		}
+		else {
+			System.out.println("No offering found. (Login with seller to add prodcuts and then try again) ");
+			return;
+		}
+
 
 		Scanner sc = new Scanner(System.in);
 		int selectOffering = sc.nextInt();
@@ -120,15 +157,15 @@ public class Facade {
 
 	}
 
-	public void remind() {
-
-	}
 
 	public static void createUser(UserInfoItem userInfoitem) {
 		UserType = userInfoitem.getUserType();
 
 	}
 
+	/**
+	 * This method is used to add a selected product which the buyer enters and desires to buy
+	 */
 	public static void createProductList() {
 		try {
 			theSelectedProduct = new Product();
@@ -152,16 +189,5 @@ public class Facade {
 
 	}
 
-	public void AttachProductToUser() {
-
-	}
-
-	public Product SelectProduct() {
-		return null;
-	}
-
-	public void productOperation() {
-
-	}
 
 }

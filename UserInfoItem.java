@@ -1,3 +1,6 @@
+/**
+ * This class is used to store the details of the logged in user.
+ */
 public class UserInfoItem {
     String user;
     int userType;

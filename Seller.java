@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * This class is a part of bridge and factory design pattern as it will be used to load menu according to a buyer and seller.
+
+ */
 public class Seller extends Person {
 	ProductMenu productMenu;
 	UserInfoItem userInfoItem = new UserInfoItem();
@@ -8,6 +12,9 @@ public class Seller extends Person {
 		this.userInfoItem = userInfoItem;
 	}
 
+	/**
+	This is a part of bridge pattern which decides menu based on the buyer or seller
+	 */
 	public void showMenu() {
 		System.out.println("Enter if you want to add or view the offerings: \n1. View\n 2. Add");
 		Scanner scan = new Scanner(System.in);

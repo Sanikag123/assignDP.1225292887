@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * This class is a part of iterator design pattern. It is used to iterate over the offering objects provided by the seller
+ */
 public class OfferingIterator implements ListIterator {
 
 	private Product selectedProduct;

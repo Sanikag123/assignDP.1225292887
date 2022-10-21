@@ -2,13 +2,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is a part of bridge and factory design pattern as it will be used to load menu according to a buyer and seller.
+ */
 public class MeatProductMenu implements ProductMenu {
 	UserInfoItem userInfoItem;
 	public MeatProductMenu(UserInfoItem userInfoItem) {
 		this.userInfoItem = userInfoItem;
 
 	}
-
+	/**
+	 This is a part of bridge pattern which decides menu based on the buyer or seller
+	 */
 	public void showMenu(Person Person) {
 		if (Person instanceof Buyer ) {
 			System.out.println("Displaying the meat products available for buyer");
@@ -70,17 +75,13 @@ public class MeatProductMenu implements ProductMenu {
 			else
 				return;
 
-
-
-
-
-
 		}
-
-
 
 	}
 
+	/**
+	 * This method is specific to seller to add new products in the system
+	 */
 	public void showAddButton() {
 		//seller uses this for adding offering
 		System.out.println("Enter what offerings you want to add : \n1. Beef\n2. Pork \n3. Mutton (Enter the product name for. eg- Beef)");

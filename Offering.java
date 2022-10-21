@@ -1,3 +1,6 @@
+/**
+ * This class is used to store objects of the offerings the seller is adding
+ */
 public class Offering {
     String sellerName;
     String productOffering;

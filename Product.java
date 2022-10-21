@@ -1,3 +1,6 @@
+/**
+ * This class is used to store the object which the byer wishes to buy and the bidprice
+ */
 public class Product {
 
     String productBuyerRequested;

@@ -8,6 +8,12 @@ public class Login {
     String password;
     static Facade facade = new Facade();
 
+    /**
+     * This method will validate if the login credentials are valid or invalid
+     * @param userType
+     * @param userInfoItem
+     * @return
+     */
     public static UserInfoItem loginScreen(int userType, UserInfoItem userInfoItem) {
         String record = null;
         FileReader in = null;

@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * This class is a part of bridge and factory design pattern as it will be used to load menu according to a buyer and seller.
+ */
 public class Buyer extends Person {
 
 	ProductMenu produceProductMenu;
@@ -11,6 +14,9 @@ public class Buyer extends Person {
 		this.userInfoItem = userInfoItem;
 	}
 
+	/**
+	 This is a part of bridge pattern which decides menu based on the buyer or seller
+	 */
 	public void showMenu() {
 		System.out.println("Showing Buyer menu ");
 		System.out.println("Select Product type: \n1. Meat \n2. Produce");
@@ -33,7 +39,12 @@ public class Buyer extends Person {
 
 	}
 
+	/**
+	 * This method is specific to creating product menu only for BUYER.
+	 * @return
+	 */
 	public ProductMenu CreateProductMenu() {
+
 		System.out.println("Add the products you want to add: ");
 		Scanner scan  = new Scanner(System.in);
 		String product = scan.next();
