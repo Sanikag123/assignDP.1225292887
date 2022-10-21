@@ -1,12 +1,14 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ProduceProductMenu implements ProductMenu {
+	UserInfoItem userInfoItem;
+    public ProduceProductMenu(UserInfoItem userInfoItem) {
+		this.userInfoItem = userInfoItem;
+    }
 
-	public void showMenu(Object person) {
+    public void showMenu(Person person) {
 		if (person instanceof Buyer ) {
 			System.out.println("Displaying the produce products available for buyer");
 
@@ -39,22 +41,86 @@ public class ProduceProductMenu implements ProductMenu {
 			}
 		}
 
-
-
-
-
 		else {
-			System.out.println("Displaying the meat products for the seller");
+			System.out.println("Displaying the produce products for the seller");
+			//Display offering for seller
+
+			try {
+				FileReader in = new FileReader("SellerOfferings");
+				BufferedReader br = new BufferedReader(in);
+				String line = br.readLine();
+				while(line != null) {
+					if((line.split(":")[0]).equals(userInfoItem.user)) {
+						System.out.println(line);
+
+					}
+					line = br.readLine();
+				}
+			}
+			catch (Exception e) {
+
+			}
+
+			System.out.println("Do you want to add new products: (Enter YES/NO)" );
+			Scanner sc = new Scanner(System.in);
+			String ans = sc.next();
+			if (ans.equalsIgnoreCase("YES")) {
+				showAddButton();
+			}
+			else
+				return;
+
+
+
+
+
 
 		}
 
 
 
 
-
 	}
 
+
+
+
+
+
+
 	public void showAddButton() {
+		//seller uses this for adding offering
+		System.out.println("Enter what offerings you want to add : \n1. Tomato\n2. Onion  (Enter the product name for. eg- Tomato)");
+		Scanner product = new Scanner(System.in);
+		String prod = product.next();
+		System.out.println("Enter what price for this product");
+		Scanner price = new Scanner(System.in);
+		String pr = price.next();
+		try {
+			FileWriter fw = new FileWriter("SellerOfferings",true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("");
+			bw.write(userInfoItem.user);
+			bw.write(":");
+			bw.write(prod);
+			bw.write(":");
+			bw.write(pr);
+			bw.newLine();
+			bw.close();
+			System.out.println("Contents added to the file");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		System.out.println("Do you want to add more products: ");
+		Scanner sc = new Scanner(System.in);
+		String ans = sc.next();
+		if (ans.equalsIgnoreCase("YES")) {
+			showAddButton();
+		}
+		else
+			return;
+
 
 	}
 

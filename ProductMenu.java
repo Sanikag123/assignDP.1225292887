@@ -1,6 +1,6 @@
 public interface   ProductMenu {
 
-	public abstract void showMenu(Object object);
+	public abstract void showMenu(Person object);
 
 	public abstract void showAddButton();
 

@@ -36,10 +36,10 @@ public class Login {
                         userInfoItem.setUserType(userType);
                         break;
 
-
                     } else {
-                        System.out.println("Credentials not matching. Try again");
-                        scan.nextLine();
+                        System.out.println("Credentials not matching.");
+                        return null;
+                        //loginScreen(userType, userInfoItem);
                         //checkInput();
                     }
                 }

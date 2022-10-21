@@ -6,8 +6,9 @@ import java.util.Scanner;
 public class Buyer extends Person {
 
 	ProductMenu produceProductMenu;
-	public Buyer() {
-
+	UserInfoItem userInfoItem;
+	public Buyer(UserInfoItem userInfoItem) {
+		this.userInfoItem = userInfoItem;
 	}
 
 	public void showMenu() {
@@ -17,14 +18,13 @@ public class Buyer extends Person {
 		int input = scan.nextInt();
 		if (input == 1) {
 			System.out.println("Meat product menu ");
-			produceProductMenu = new MeatProductMenu();
+			produceProductMenu = new MeatProductMenu(userInfoItem);
 			produceProductMenu.showMenu(this);
-
 
 		}
 		else  {
 			System.out.println("Produce product menu ");
-			produceProductMenu = new ProduceProductMenu();
+			produceProductMenu = new ProduceProductMenu(userInfoItem);
 			produceProductMenu.showMenu(this);
 
 
@@ -46,11 +46,11 @@ public class Buyer extends Person {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		BufferedWriter bw = new BufferedWriter(fw);
+		BufferedWriter bw;
 
 		try {
-			bw.write("");
-			bw.flush();
+			bw = new BufferedWriter(fw);
+
 			bw.write(product);
 			bw.write(":");
 
