@@ -17,6 +17,7 @@ public class Login {
     public static UserInfoItem loginScreen(int userType, UserInfoItem userInfoItem) {
         String record = null;
         FileReader in = null;
+        int flag = 0;
 
         try {
             if (userType == 1) {
@@ -25,34 +26,37 @@ public class Login {
                 in = new FileReader("BuyerInfo.txt");
 
 
-                BufferedReader br = new BufferedReader(in);
-                Scanner scan = new Scanner(System.in);
+            BufferedReader br = new BufferedReader(in);
+            Scanner scan = new Scanner(System.in);
 
-                System.out.print("Username: ");
-                String user = scan.nextLine();
+            System.out.print("Username: ");
+            String user = scan.nextLine();
 
-                System.out.print("Password: ");
-                String pass = scan.nextLine();
-                String credentials = user + ":" + pass;
-                while ((record = br.readLine()) != null) {
+            System.out.print("Password: ");
+            String pass = scan.nextLine();
+            String credentials = user + ":" + pass;
+            while ((record = br.readLine()) != null) {
 
-                    if (credentials.equals(record)) {
-                        System.out.println("Credentials matching");
-                        userInfoItem.setUserName(user);
-                        userInfoItem.setUserType(userType);
-                        break;
+                if (credentials.equals(record)) {
+                    System.out.println("Credentials matching");
+                    userInfoItem.setUserName(user);
+                    userInfoItem.setUserType(userType);
+                    flag = 1;
+                    break;
 
-                    } else {
-                        System.out.println("Credentials not matching.");
-                        return null;
-                        //loginScreen(userType, userInfoItem);
-                        //checkInput();
-                    }
                 }
+            }
+
 
         }
             catch (IOException e) {
             e.getCause();
+        }
+        if (flag == 0) {
+            System.out.println("Credentials not matching.");
+            return null;
+            //loginScreen(userType, userInfoItem);
+            //checkInput();
         }
         return userInfoItem;
     }
