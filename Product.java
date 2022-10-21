@@ -1,4 +1,4 @@
-public class Product extends Object{
+public class Product {
 
     String productBuyerRequested;
     String bidPrice;
