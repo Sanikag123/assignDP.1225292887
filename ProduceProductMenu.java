@@ -94,7 +94,7 @@ public class ProduceProductMenu implements ProductMenu {
 		try {
 			FileWriter fw = new FileWriter("SellerOfferings",true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("");
+			//bw.write("");
 			bw.write(userInfoItem.user);
 			bw.write(":");
 			bw.write(prod);
