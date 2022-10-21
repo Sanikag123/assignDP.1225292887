@@ -77,14 +77,7 @@ public class Facade {
 		System.out.println("Seller name: " + o.getSellerName());
 		System.out.println("Product name: " + o.getProductOffering());
 //Clear the contents of the buyer product file
-		BufferedWriter writer = null;
-		try {
-			writer = Files.newBufferedWriter(Paths.get("BuyerProductCart"));
-			writer.write("");
-			writer.flush();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+
 
 
 	}
@@ -137,7 +130,7 @@ public class Facade {
 	 */
 	public static void submitBidding(OfferingList finalOfferingList) {
 		if(finalOfferingList.size() > 0) {
-			System.out.println("Select the offering from the seller: (Enter the serial no.) ");
+			System.out.println("Select the offering from the seller: (Enter the serial no. of offering) ");
 			for (int i = 0; i < finalOfferingList.size(); i++) {
 				System.out.println(i + 1 + ": Seller Name: " + ((Offering) (finalOfferingList.get(i))).getSellerName()
 						+ " Price offered: " + ((Offering) (finalOfferingList.get(i))).getPrice()

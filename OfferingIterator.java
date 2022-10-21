@@ -30,7 +30,7 @@ public class OfferingIterator implements ListIterator {
 			ArrayList price = new ArrayList();
 			String offeringProduct = o.getProductOffering().trim();
 			String buyerRequest = selectedProduct.getProduct().trim();
-			if (offeringProduct.equals(buyerRequest)) {
+			if (offeringProduct.equalsIgnoreCase(buyerRequest)) {
 				position++;
 				return o;
 

@@ -45,7 +45,7 @@ public class Buyer extends Person {
 	 */
 	public ProductMenu CreateProductMenu() {
 
-		System.out.println("Add the products you want to add: ");
+		System.out.println("Add the products you want to add: (Enter name of product for eg. Tomato)");
 		Scanner scan  = new Scanner(System.in);
 		String product = scan.next();
 		System.out.println("Add the bidding price for the same: ");
